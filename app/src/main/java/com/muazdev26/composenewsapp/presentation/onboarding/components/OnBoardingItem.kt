@@ -12,12 +12,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.muazdev26.composenewsapp.presentation.Dimensions.MEDIUM_PADDING
+import com.muazdev26.composenewsapp.presentation.Dimensions.MediumPadding
 import com.muazdev26.composenewsapp.presentation.onboarding.OnBoarding
 import com.muazdev26.composenewsapp.presentation.onboarding.onBoardingScreens
 
@@ -36,13 +35,13 @@ fun OnBoardingItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.5f)
-                .padding(horizontal = MEDIUM_PADDING)
+                .padding(horizontal = MediumPadding)
         )
-        Spacer(modifier = Modifier.height(MEDIUM_PADDING))
+        Spacer(modifier = Modifier.height(MediumPadding))
         Text(
             text = stringResource(id = onBoarding.title), fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.displaySmall, modifier = Modifier.padding(
-                MEDIUM_PADDING
+                MediumPadding
             )
         )
         Text(
@@ -51,7 +50,7 @@ fun OnBoardingItem(
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(
                 horizontal =
-                MEDIUM_PADDING
+                MediumPadding
             )
         )
     }

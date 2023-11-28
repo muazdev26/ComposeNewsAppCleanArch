@@ -18,8 +18,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.muazdev26.composenewsapp.presentation.Dimensions.INDICATORS_SIZE
-import com.muazdev26.composenewsapp.presentation.Dimensions.MEDIUM_PADDING
+import com.muazdev26.composenewsapp.presentation.Dimensions.IndicatorsWidth
+import com.muazdev26.composenewsapp.presentation.Dimensions.MediumPadding
 import com.muazdev26.composenewsapp.presentation.common.NewsButton
 import com.muazdev26.composenewsapp.presentation.common.NewsTextButton
 import com.muazdev26.composenewsapp.presentation.common.PageIndicator
@@ -57,7 +57,7 @@ fun OnBoardingScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = MEDIUM_PADDING)
+                .padding(horizontal = MediumPadding)
                 .navigationBarsPadding(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -65,7 +65,7 @@ fun OnBoardingScreen(
 
             val scope = rememberCoroutineScope()
             PageIndicator(
-                modifier = Modifier.width(INDICATORS_SIZE),
+                modifier = Modifier.width(IndicatorsWidth),
                 pageSize = onBoardingScreens.size,
                 selectedPage = pagerState.currentPage
             )

@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
 import com.muazdev26.composenewsapp.domain.models.Article
@@ -35,7 +36,8 @@ fun NewsItem(
                 .size(NewsCardSize)
                 .clip(MaterialTheme.shapes.medium),
             model = article.urlToImage,
-            contentDescription = "news Image"
+            contentDescription = "news Image",
+            contentScale = ContentScale.Crop,
         )
 
         Column(
@@ -47,10 +49,10 @@ fun NewsItem(
             Text(text = article.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
 
             Row {
-                Text(text = article.source.name)
+                Text(text = article.source.name, style = MaterialTheme.typography.labelSmall)
                 Spacer(modifier = Modifier.width(SmallPadding))
                 Icon(imageVector = Icons.Filled.DateRange, contentDescription = null)
-                Text(text = article.publishedAt)
+                Text(text = article.publishedAt, style = MaterialTheme.typography.labelSmall)
             }
         }
     }
