@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val newsUseCase: NewsUseCases
+    newsUseCase: NewsUseCases
 ) : ViewModel() {
 
     val news = newsUseCase.getNewsUseCase(listOf("bbc-news", "abc-news", "al-jazeera-english"))

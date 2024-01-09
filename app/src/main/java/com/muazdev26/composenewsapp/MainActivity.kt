@@ -66,9 +66,6 @@ class MainActivity : ComponentActivity() {
                         navController = rememberNavController(),
                         onBoardingViewModel = onBoardingViewModel
                     )
-
-//                    val onBoardingViewModel: OnBoardingViewModel = hiltViewModel()
-//                    OnBoardingScreen(onBoardingEvent = onBoardingViewModel::onEvent)
                 }
             }
         }

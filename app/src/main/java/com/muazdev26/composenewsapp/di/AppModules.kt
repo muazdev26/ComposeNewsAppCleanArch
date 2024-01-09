@@ -11,6 +11,7 @@ import com.muazdev26.composenewsapp.domain.usecases.home.NewsUseCases
 import com.muazdev26.composenewsapp.domain.usecases.launch.AppEntryUseCases
 import com.muazdev26.composenewsapp.domain.usecases.launch.ReadAppEntryUseCase
 import com.muazdev26.composenewsapp.domain.usecases.launch.SaveAppEntryUseCase
+import com.muazdev26.composenewsapp.domain.usecases.search.SearchUseCase
 import com.muazdev26.composenewsapp.util.Consts
 import dagger.Module
 import dagger.Provides
@@ -67,5 +68,13 @@ object AppModules {
         newsRepository: NewsRepository
     ) = NewsUseCases(
         getNewsUseCase = GetNewsUseCase(newsRepository)
+    )
+
+    @Provides
+    @Singleton
+    fun providesSearchUseCases(
+        newsRepository: NewsRepository
+    ) = SearchUseCase(
+        newsRepository
     )
 }
