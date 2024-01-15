@@ -9,4 +9,6 @@ object Consts {
     const val DEFAULT_PAGE = 1
 
     const val BASE_URL = "https://newsapi.org/v2/"
+
+    const val ARTICLE_KEY = "article"
 }

@@ -1,11 +1,20 @@
 package com.muazdev26.composenewsapp.di
 
 import android.app.Application
+import androidx.room.Room
+import com.muazdev26.composenewsapp.data.local.NewsDao
+import com.muazdev26.composenewsapp.data.local.NewsDatabase
+import com.muazdev26.composenewsapp.data.local.SourceTypeConvertor
 import com.muazdev26.composenewsapp.data.prefrences.AppPreferencesHelperImpl
 import com.muazdev26.composenewsapp.data.remote.NewsApi
 import com.muazdev26.composenewsapp.data.remote.repository.NewsRepositoryImpl
 import com.muazdev26.composenewsapp.domain.prefrences.AppPreferencesHelper
 import com.muazdev26.composenewsapp.domain.repositories.NewsRepository
+import com.muazdev26.composenewsapp.domain.usecases.bookmarks.BookMarkUseCases
+import com.muazdev26.composenewsapp.domain.usecases.bookmarks.DeleteBookMarkUseCase
+import com.muazdev26.composenewsapp.domain.usecases.bookmarks.GetBookMarksUseCase
+import com.muazdev26.composenewsapp.domain.usecases.bookmarks.GetSingleBookMarkUseCase
+import com.muazdev26.composenewsapp.domain.usecases.bookmarks.UpsertBookMarkUseCase
 import com.muazdev26.composenewsapp.domain.usecases.home.GetNewsUseCase
 import com.muazdev26.composenewsapp.domain.usecases.home.NewsUseCases
 import com.muazdev26.composenewsapp.domain.usecases.launch.AppEntryUseCases
@@ -57,9 +66,9 @@ object AppModules {
     @Provides
     @Singleton
     fun providesNewsRepository(
-        newsApi: NewsApi
+        newsApi: NewsApi, newsDao: NewsDao
     ): NewsRepository = NewsRepositoryImpl(
-        newsApi
+        newsApi, newsDao
     )
 
     @Provides
@@ -72,9 +81,41 @@ object AppModules {
 
     @Provides
     @Singleton
+    fun providesBookmarksUseCases(
+        newsRepository: NewsRepository
+    ) = BookMarkUseCases(
+        getBookMarksUseCase = GetBookMarksUseCase(newsRepository),
+        getSingleBookMarkUseCase = GetSingleBookMarkUseCase(newsRepository),
+        deleteBookMarkUseCase = DeleteBookMarkUseCase(newsRepository),
+        upsertBookMarkUseCase = UpsertBookMarkUseCase(newsRepository),
+    )
+
+    @Provides
+    @Singleton
     fun providesSearchUseCases(
         newsRepository: NewsRepository
     ) = SearchUseCase(
         newsRepository
     )
+
+    @Provides
+    @Singleton
+    fun providesNewsDatabase(
+        application: Application
+    ): NewsDatabase {
+        return Room.databaseBuilder(application, NewsDatabase::class.java, "news_db.db")
+            .addTypeConverter(SourceTypeConvertor::class.java)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesNewsSourcesDao(
+        newsDatabase: NewsDatabase
+    ): NewsDao {
+        return newsDatabase.newsDao
+    }
+
+
 }

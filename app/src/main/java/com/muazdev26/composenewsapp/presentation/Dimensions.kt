@@ -5,6 +5,7 @@ import androidx.compose.ui.unit.sp
 
 object Dimensions {
 
+    val ImageHeight = 200.dp
     val MediumPadding = 20.dp
     val SmallPadding = 16.dp
     val BoldHeading = 22.sp

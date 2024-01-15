@@ -1,12 +1,13 @@
 package com.muazdev26.composenewsapp.presentation.search
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.muazdev26.composenewsapp.domain.usecases.search.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,8 +15,8 @@ class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase
 ) : ViewModel() {
 
-    private val _searchState = mutableStateOf(SearchState())
-    val searchState: State<SearchState> = _searchState
+    private val _searchState = MutableStateFlow(SearchState())
+    val searchState = _searchState.asStateFlow()
 
     fun onSearchEvent(searchEvents: SearchEvents) {
         when (searchEvents) {
@@ -24,7 +25,9 @@ class SearchViewModel @Inject constructor(
             }
 
             is SearchEvents.UpdateSearchQuery -> {
-                _searchState.value = _searchState.value.copy(query = searchEvents.searchQuery)
+                _searchState.update {
+                    it.copy(query = searchEvents.searchQuery)
+                }
             }
         }
     }

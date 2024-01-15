@@ -9,19 +9,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.muazdev26.composenewsapp.R
 import com.muazdev26.composenewsapp.domain.models.Article
-import com.muazdev26.composenewsapp.presentation.Dimensions
 import com.muazdev26.composenewsapp.presentation.Dimensions.MediumPadding
 import com.muazdev26.composenewsapp.presentation.Dimensions.SmallPadding
 import com.muazdev26.composenewsapp.presentation.common.ArticlesList
@@ -31,7 +27,8 @@ import com.muazdev26.composenewsapp.presentation.navgraph.Route
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<Article>,
-    navigate: (String) -> Unit
+    navigateToSearchScreen: () -> Unit,
+    navigateToDetailsScreen: (Article) -> Unit
 ) {
 
     Column(
@@ -44,7 +41,7 @@ fun HomeScreen(
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
-        ){
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_news_icon),
                 contentDescription = "",
@@ -64,14 +61,14 @@ fun HomeScreen(
             onValueChange = {},
             onSearchClick = { },
             onClick = {
-                navigate(Route.SearchNewsRoute.route)
+                navigateToSearchScreen()
             })
         Spacer(modifier = Modifier.height(SmallPadding))
 
         ArticlesList(
             articles = articles,
             onClick = {
-                navigate(Route.NewsDetailRoute.route)
+                navigateToDetailsScreen(it)
             })
     }
 
