@@ -6,5 +6,5 @@ class GetSingleBookMarkUseCase(
     private val newsRepository: NewsRepository
 ) {
 
-    operator fun invoke(id: Long) = newsRepository.getSingBookMark(id)
+    suspend operator fun invoke(url: String) = newsRepository.getSingBookMark(url)
 }

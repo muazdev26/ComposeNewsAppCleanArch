@@ -18,7 +18,7 @@ fun LoadState.Error?.parseErrorMessage(context: Context): String {
         }
 
         else -> {
-            context.getString(R.string.unknow_error)
+            context.getString(R.string.unknown_error)
         }
     }
 }

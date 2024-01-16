@@ -4,7 +4,7 @@ import com.muazdev26.composenewsapp.data.local.ArticleEntity
 import com.muazdev26.composenewsapp.domain.models.Article
 
 fun ArticleEntity.toArticle() = Article(
-    author, content, description, publishedAt, source, title, url, urlToImage, id
+    author, content, description, publishedAt, source, title, url, urlToImage
 )
 
 fun Article.toArticleEntity() = ArticleEntity(

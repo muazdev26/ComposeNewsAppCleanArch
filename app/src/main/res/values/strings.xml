@@ -6,8 +6,8 @@
     <string name="desc_1">This is first onboarding screen..</string>
     <string name="desc_2">This is second onboarding screen..</string>
     <string name="desc_3">This is third onboarding screen..</string>
-    <string name="unknow_error">Unknown Error</string>
-    <string name="server_not_available">Server is not availabel at this time, Kindly try again later..</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="server_not_available">Server is not available at this time, Kindly try again later..</string>
     <string name="internet_un_available">Internet Un-available</string>
     <string name="search_here">Search here....</string>
     <string name="bookmarks">BookMarks</string>

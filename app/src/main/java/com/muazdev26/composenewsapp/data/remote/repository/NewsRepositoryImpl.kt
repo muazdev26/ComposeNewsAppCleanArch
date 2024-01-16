@@ -51,8 +51,8 @@ class NewsRepositoryImpl(
         }
     }
 
-    override fun getSingBookMark(id: Long): Article? {
-        return newsDao.getArticle(id)?.toArticle()
+    override suspend fun getSingBookMark(url: String): Article? {
+        return newsDao.getArticle(url)?.toArticle()
     }
 
     override suspend fun deleteBookMark(article: Article) {

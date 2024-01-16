@@ -104,7 +104,6 @@ object AppModules {
         application: Application
     ): NewsDatabase {
         return Room.databaseBuilder(application, NewsDatabase::class.java, "news_db.db")
-            .addTypeConverter(SourceTypeConvertor::class.java)
             .fallbackToDestructiveMigration()
             .build()
     }

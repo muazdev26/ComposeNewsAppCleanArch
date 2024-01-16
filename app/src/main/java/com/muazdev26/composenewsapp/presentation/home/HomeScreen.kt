@@ -34,7 +34,6 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = MediumPadding)
             .statusBarsPadding()
     ) {
 
@@ -45,14 +44,9 @@ fun HomeScreen(
             Image(
                 painter = painterResource(id = R.drawable.ic_news_icon),
                 contentDescription = "",
-                modifier = Modifier
-                    .height(100.dp)
-                    .width(100.dp)
-                    .padding(SmallPadding),
+                modifier = Modifier.height(70.dp)
             )
         }
-
-        Spacer(modifier = Modifier.height(SmallPadding))
 
         Searchbar(
             modifier = Modifier,
@@ -63,7 +57,6 @@ fun HomeScreen(
             onClick = {
                 navigateToSearchScreen()
             })
-        Spacer(modifier = Modifier.height(SmallPadding))
 
         ArticlesList(
             articles = articles,

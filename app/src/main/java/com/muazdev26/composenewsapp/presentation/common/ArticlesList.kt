@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -29,12 +30,14 @@ fun ArticlesList(
             verticalArrangement = Arrangement.spacedBy(MediumPadding),
             contentPadding = PaddingValues(SmallPadding)
         ) {
-            items(count = articles.itemCount) {
-                articles[it]?.let { article ->
-                    NewsItem(article = article, onClick = {
-                        onClick(article)
-                    })
-                }
+            items(
+                items = articles.itemSnapshotList.items,
+                key = {
+                    it.url
+                }) { article ->
+                NewsItem(article = article, onClick = {
+                    onClick(article)
+                })
             }
         }
     }

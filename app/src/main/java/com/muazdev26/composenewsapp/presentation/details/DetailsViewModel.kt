@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.muazdev26.composenewsapp.domain.usecases.bookmarks.BookMarkUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,15 +16,16 @@ class DetailsViewModel @Inject constructor(
     private val bookMarkUseCases: BookMarkUseCases
 ) : ViewModel() {
 
-     var sideEffects by mutableStateOf<String?>(null)
+    var toastMessage by mutableStateOf<String?>(null)
         private set
 
     fun onEvent(events: DetailsEvents) {
         when (events) {
             is DetailsEvents.UpsertDeleteArticle -> {
-                viewModelScope.launch {
-                    val article = bookMarkUseCases.getSingleBookMarkUseCase(events.article.id)
-                    sideEffects = if (article == null) {
+                viewModelScope.launch(Dispatchers.IO) {
+                    val article =
+                        bookMarkUseCases.getSingleBookMarkUseCase(events.article.url)
+                    toastMessage = if (article == null) {
                         bookMarkUseCases.upsertBookMarkUseCase(events.article)
                         "Article Bookmarked"
                     } else {
@@ -34,7 +36,7 @@ class DetailsViewModel @Inject constructor(
             }
 
             DetailsEvents.RemovingSideEffects -> {
-                sideEffects = null
+                toastMessage = null
             }
         }
     }

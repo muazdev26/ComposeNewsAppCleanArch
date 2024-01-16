@@ -1,10 +1,8 @@
 package com.muazdev26.composenewsapp.data.local
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.muazdev26.composenewsapp.domain.models.Source
 
-@ProvidedTypeConverter
 class SourceTypeConvertor {
     @TypeConverter
     fun sourceToString(source: Source): String {

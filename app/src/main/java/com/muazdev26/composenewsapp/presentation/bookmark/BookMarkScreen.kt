@@ -29,7 +29,6 @@ fun BookMarkScreen(
             .statusBarsPadding()
             .padding(SmallPadding)
     ) {
-
         Text(
             text = stringResource(id = R.string.bookmarks),
             style = MaterialTheme.typography.headlineSmall,
@@ -41,8 +40,6 @@ fun BookMarkScreen(
         ArticlesList(articles = bookMarkScreenState.bookmarkArticles, onClick = {
             navigateToDetailsScreen(it)
         })
-
-
     }
 
 }

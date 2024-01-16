@@ -29,25 +29,23 @@ fun AppBottomNavigation(
 
     NavigationBar(
         modifier = Modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.background,
-        tonalElevation = 10.dp
+        containerColor = MaterialTheme.colorScheme.background
     ) {
         items.forEachIndexed { index, bottomNavigationItem ->
             NavigationBarItem(
                 selected = selectedIndex == index,
                 onClick = { onItemClick(index) },
                 icon = {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(
-                            painter = painterResource(id = bottomNavigationItem.icon),
-                            contentDescription = stringResource(id = bottomNavigationItem.text)
-                        )
-                        Spacer(modifier = Modifier.height(SmallPadding))
-                        Text(
-                            text = stringResource(id = bottomNavigationItem.text),
-                            style = MaterialTheme.typography.labelSmall
-                        )
-                    }
+                    Icon(
+                        painter = painterResource(id = bottomNavigationItem.icon),
+                        contentDescription = stringResource(id = bottomNavigationItem.text)
+                    )
+                },
+                label = {
+                    Text(
+                        text = stringResource(id = bottomNavigationItem.text),
+                        style = MaterialTheme.typography.labelSmall
+                    )
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,

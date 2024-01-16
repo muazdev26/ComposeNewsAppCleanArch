@@ -53,7 +53,9 @@ fun DetailsScreen(
                 }
             },
             onSeeMoreClick = { onSeeMoreClick() },
-            onBookMarkClick = { events(DetailsEvents.UpsertDeleteArticle) }) {
+            onBookMarkClick = {
+                events(DetailsEvents.UpsertDeleteArticle(article))
+            }) {
             navigateUp()
         }
 
@@ -80,10 +82,11 @@ fun DetailsScreen(
                         fontWeight = FontWeight.Bold
                     ), color = colorResource(id = R.color.text_title)
                 )
+                Spacer(modifier = Modifier.height(Dimensions.SmallPadding))
 
                 Text(
-                    text = article.title,
-                    style = MaterialTheme.typography.bodySmall,
+                    text = article.description,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = colorResource(id = R.color.text_title)
                 )
             }

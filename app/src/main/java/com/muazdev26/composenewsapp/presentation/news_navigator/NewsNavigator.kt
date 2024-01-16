@@ -67,7 +67,7 @@ fun NewsNavigator() {
         }
     }
 
-    val isBottomBarShow = rememberSaveable {
+    val isBottomBarShow = remember(key1 = backStackState) {
         backStackState?.destination?.route == Route.HomeRoute.route ||
                 backStackState?.destination?.route == Route.SearchNewsRoute.route ||
                 backStackState?.destination?.route == Route.SavedNewsRoute.route
@@ -76,7 +76,7 @@ fun NewsNavigator() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            if (isBottomBarShow)
+            if (isBottomBarShow) {
                 AppBottomNavigation(
                     items = bottomNavigationItems,
                     selectedIndex = selectedItem,
@@ -96,6 +96,7 @@ fun NewsNavigator() {
                         }
 
                     })
+            }
         }
     ) {
         val bottomPadding = it.calculateBottomPadding()
@@ -135,8 +136,8 @@ fun NewsNavigator() {
 
             composable(Route.NewsDetailRoute.route) {
                 val viewModel: DetailsViewModel = hiltViewModel()
-                if (viewModel.sideEffects != null) {
-                    Toast.makeText(LocalContext.current, viewModel.sideEffects, Toast.LENGTH_SHORT)
+                if (viewModel.toastMessage != null) {
+                    Toast.makeText(LocalContext.current, viewModel.toastMessage, Toast.LENGTH_SHORT)
                         .show()
                     viewModel.onEvent(DetailsEvents.RemovingSideEffects)
                 }
